@@ -26,7 +26,7 @@
         /// Требуемый метод для поддержки конструктора — не изменяйте 
         /// содержимое этого метода с помощью редактора кода.
         /// </summary>
-        private void InitializeComponent()
+        public void InitializeComponent()
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();

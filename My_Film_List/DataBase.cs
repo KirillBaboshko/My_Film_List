@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
+using System.Data.SQLite;
 
 namespace My_Film_List
 {
     internal class DataBase
     {
-        SqlConnection sqlConnection = new SqlConnection(@"Data Source=DESKTOP-OE9LISE\SQLEXPRESS;Initial Catalog=Film_DB;Integrated Security=True");
+        SQLiteConnection sqlConnection = new SQLiteConnection("Data Source=My_Film_List.db");
         public void openConnection()
         {
             if(sqlConnection.State==System.Data.ConnectionState.Closed)
@@ -24,7 +24,7 @@ namespace My_Film_List
                 sqlConnection.Close();
             }
         }
-        public SqlConnection GetConnection()
+        public SQLiteConnection GetConnection()
         {
             return sqlConnection;
         }

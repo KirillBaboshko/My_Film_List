@@ -16,7 +16,7 @@ namespace My_Film_List
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LogForm());
+            Application.Run(new MainForm());
         }
     }
 }

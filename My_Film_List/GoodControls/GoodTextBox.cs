@@ -17,6 +17,7 @@ namespace My_Film_List.GoodControls
         private bool underlinedStyle = false;
         private Color borderFocusColor = Color.HotPink;
         private bool isFocused = false;
+     
         public GoodTextBox()
         {
             InitializeComponent();
@@ -59,7 +60,6 @@ namespace My_Film_List.GoodControls
                 this.Invalidate();
             }
         }
-
         public bool PasswordChar
         {
             get { return textBox1.UseSystemPasswordChar; }
@@ -135,6 +135,10 @@ namespace My_Film_List.GoodControls
             base.OnResize(e);
             if (this.DesignMode)
                 UpdateControlHeight();
+        }
+        protected override void OnTextChanged(EventArgs e)
+        {
+            base.OnTextChanged(e);
         }
         protected override void OnLoad(EventArgs e)
         {
