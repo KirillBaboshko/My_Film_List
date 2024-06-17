@@ -190,11 +190,11 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("MS Reference Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(260, 349);
+            this.label5.Location = new System.Drawing.Point(270, 349);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(143, 24);
+            this.label5.Size = new System.Drawing.Size(133, 24);
             this.label5.TabIndex = 9;
-            this.label5.Text = "Дата выхода:";
+            this.label5.Text = "Год выхода:";
             // 
             // TextBoxLink
             // 

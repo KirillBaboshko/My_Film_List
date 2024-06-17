@@ -63,6 +63,36 @@ namespace My_Film_List.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_обновить_50__1_ {
+            get {
+                object obj = ResourceManager.GetObject("icons8-обновить-50 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_обновить_50__2___1_ {
+            get {
+                object obj = ResourceManager.GetObject("icons8-обновить-50 (2) (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_стереть_50__1_ {
+            get {
+                object obj = ResourceManager.GetObject("icons8-стереть-50 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap refresh_1_1024__1_ {
             get {
                 object obj = ResourceManager.GetObject("refresh-1-1024-_1_", resourceCulture);
