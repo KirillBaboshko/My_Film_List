@@ -144,6 +144,36 @@
   <ItemGroup>
     <None Include="Resources\icons8-стереть-50 %281%29.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-обновление-40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-обновление-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-стереть-50 %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-стереть-40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-добавить-свойство-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-cancel-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-cinema-seats-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-cinema-seats-80.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-cinema-seats-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-добавить-список-100.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -4,9 +4,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Data.SQLite;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -101,7 +103,8 @@ namespace My_Film_List
             int Duration = int.Parse(DataGridPlanned.Rows[index].Cells[3].Value.ToString());
             int Date=int.Parse(DataGridPlanned.Rows[index].Cells[4].Value.ToString());
             var Link = DataGridPlanned.Rows[index].Cells[5].Value;
-            var addQuert = $"INSERT INTO Viewed (id_item,item_name,item_count_of_episodes_max,item_count_of_episodes_now,item_duration,item_realease_date,item_link,item_rating) values ('{id}','{Name}','{MaxCount}','{MinCount}','{Duration}','{Date}','{Link}','{0.0}')";
+            var addQuert = $"INSERT INTO Viewed (id_item,item_name,item_count_of_episodes_max,item_count_of_episodes_now,item_duration," +
+                $"item_realease_date,item_link,item_rating) values ('{id}','{Name}','{MaxCount}','{MinCount}','{Duration}','{Date}','{Link}','{0.0}')";
             var command = new SQLiteCommand(addQuert, dataBase.GetConnection());
             command.ExecuteNonQuery();
             dataBase.closeConnection();
@@ -242,9 +245,23 @@ namespace My_Film_List
 
             if (int.TryParse(TextBoxCount1.Texts, out MaxCount) && int.TryParse(TextBoxCount2.Texts, out MinCount) && int.TryParse(TextBoxDuration.Texts, out Duration) && int.TryParse(TextBoxData.Texts, out Date))
             {
-                var addQuert = $"UPDATE Planned SET item_name= '{Name}',item_count_of_episodes_max = '{MaxCount}',item_count_of_episodes_now = '{MinCount}',item_duration = '{Duration}',item_realease_date = '{Date}',item_link = '{Link}' WHERE id_item='{id}'";
-                var command = new SQLiteCommand(addQuert, dataBase.GetConnection());
-                command.ExecuteNonQuery();
+                if (MinCount<=MaxCount && MinCount>=0 && Duration>0 && Date>=1895 && MaxCount>=0 && Date <= 3000)
+                {
+                    if (Name!=null && Name.ToString().Trim()!=string.Empty)
+                    {
+                        var addQuert = $"UPDATE Planned SET item_name= '{Name}',item_count_of_episodes_max = '{MaxCount}',item_count_of_episodes_now = '{MinCount}',item_duration = '{Duration}',item_realease_date = '{Date}',item_link = '{Link}' WHERE id_item='{id}'";
+                        var command = new SQLiteCommand(addQuert, dataBase.GetConnection());
+                        command.ExecuteNonQuery();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Поле название не должно быть путсым!!!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Допустили ошибку при вводе даты,количества эпизодов или продолжительности!!!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             else
             {
@@ -306,11 +323,18 @@ namespace My_Film_List
             float Rating;
             if(float.TryParse(TextBoxRating.Texts.ToString(),out Rating))
             {
-                string str = Rating.ToString();
-                str = str.Replace(",",".");
-                var addQuert = $"UPDATE Viewed SET item_rating= '{str}' WHERE id_item='{id}'";
-                var command = new SQLiteCommand(addQuert, dataBase.GetConnection());
-                command.ExecuteNonQuery();
+                if(Rating>=0&& Rating<=10)
+                {
+                    string str = Rating.ToString();
+                    str = str.Replace(",", ".");
+                    var addQuert = $"UPDATE Viewed SET item_rating= '{str}' WHERE id_item='{id}'";
+                    var command = new SQLiteCommand(addQuert, dataBase.GetConnection());
+                    command.ExecuteNonQuery();
+                }
+                else
+                {
+                    MessageBox.Show("Допустили ошибку при вводе данных!!!", "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             else
             {
@@ -354,6 +378,37 @@ namespace My_Film_List
             {
                 this.Close();
             }
+        }
+
+        private void DataGridPlanned_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.ColumnIndex==5)
+            {
+                ProcessStartInfo psInfo = new ProcessStartInfo
+                {
+                    FileName = DataGridPlanned.Rows[e.RowIndex].Cells[5].Value.ToString(),
+                    UseShellExecute = true
+                };
+                Process.Start(psInfo);
+            }
+        }
+
+        private void DataGridViewed_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 5)
+            {
+                ProcessStartInfo psInfo = new ProcessStartInfo
+                {
+                    FileName = DataGridViewed.Rows[e.RowIndex].Cells[5].Value.ToString(),
+                    UseShellExecute = true
+                };
+                Process.Start(psInfo);
+            }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Небольшая информация по использованию приложения:\n\n\n1. Все новые добавленные записи имеют свой уникальный id и добавляют в конец списка.\n\n2. Поля каждой записи проверяются при добавлении и при изменениях, но, пожалуйста, будьте добры вводить корректные данные.\n\n3. Будьте предельно осторожны с командой удаления, ведь удаленные данные уже не подлежат восстановлению.\n\n4. При двойном нажатии на ячейку ссылки, вас перенесет на соответствующий ресурс, но если ссылка устарела или введена неправильно, то ничего не произойдет.\n\n5. Запись может быть перенесена в раздел Просмотренных, даже если количество просмотренных эпизодов не соответствует общему количеству эпизодов. Таким образом возможно пропускать неинтересные для вас запланированные произведения.", "Информация для пользователя", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
